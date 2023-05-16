@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>611166463193-u7bnskat0go9meo5nlls24a1vado99n8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.611166463193-u7bnskat0go9meo5nlls24a1vado99n8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBemIpJ3oUp9ZBh8swsEwDUN7aiaQe9HK4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>611166463193</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.FastFeed</string>
+	<key>PROJECT_ID</key>
+	<string>fastfeed-bf48f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fastfeed-bf48f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:611166463193:ios:d873644f32fd68e860cac8</string>
+</dict>
+</plist>
