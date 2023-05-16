@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "611166463193",
+    "project_id": "fastfeed-bf48f",
+    "storage_bucket": "fastfeed-bf48f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611166463193:android:988fcc0943f6aea860cac8",
+        "android_client_info": {
+          "package_name": "com.example.FastFeed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611166463193-5a0kv8fqcugaj41maaodtu9dinsf8gmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS3h4R_SAHaU5rtl4rfLeT4WNZPkSXkZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611166463193-5a0kv8fqcugaj41maaodtu9dinsf8gmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
