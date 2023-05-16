@@ -1,4 +1,4 @@
-import 'package:FastFeed/model/entity/store.dart';
+import 'package:owner_ordering_frontend/model/entity/store.dart';
 
 abstract class StoreRepository{
   Future<List<Store>> getStores(int id);

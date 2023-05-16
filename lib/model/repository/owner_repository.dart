@@ -1,4 +1,4 @@
-import 'package:FastFeed/model/entity/owner.dart';
+import 'package:owner_ordering_frontend/model/entity/owner.dart';
 
 abstract class OwnerRepository{
   Future<List<Owner>> getOwners();

@@ -1,4 +1,4 @@
-import 'package:FastFeed/model/entity/store.dart';
+import 'package:owner_ordering_frontend/model/entity/store.dart';
 import 'package:dio/dio.dart';
 import '../util/constants.dart';
 import 'store_repository.dart';

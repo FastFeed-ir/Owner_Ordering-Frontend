@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:FastFeed/model/entity/subscription_model.dart';
-import 'package:FastFeed/model/repository/subscription_repository_impl.dart';
+import 'package:owner_ordering_frontend/model/entity/subscription_model.dart';
+import 'package:owner_ordering_frontend/model/repository/subscription_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
 
 class SubscriptionViewModel extends ChangeNotifier{

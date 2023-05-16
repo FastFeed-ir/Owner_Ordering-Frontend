@@ -1,4 +1,4 @@
-import 'package:FastFeed/model/entity/subscription_model.dart';
+import 'package:owner_ordering_frontend/model/entity/subscription_model.dart';
 
 abstract class SubscriptonRepository{
 
