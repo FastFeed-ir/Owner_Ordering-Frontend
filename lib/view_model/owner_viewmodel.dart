@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:FastFeed/model/entity/owner.dart';
-import 'package:FastFeed/model/repository/owner_repository_impl.dart';
+import 'package:owner_ordering_frontend/model/entity/owner.dart';
+import 'package:owner_ordering_frontend/model/repository/owner_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
 
 class OwnerViewModel extends ChangeNotifier {

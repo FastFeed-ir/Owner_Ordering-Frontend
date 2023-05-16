@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:FastFeed/model/entity/product.dart';
-import 'package:FastFeed/model/repository/collection_repository_impl.dart';
+import 'package:owner_ordering_frontend/model/entity/product.dart';
+import 'package:owner_ordering_frontend/model/repository/collection_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../model/entity/collection.dart';

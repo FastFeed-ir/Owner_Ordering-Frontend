@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:FastFeed/model/entity/store.dart';
-import 'package:FastFeed/model/repository/store_repository_impl.dart';
+import 'package:owner_ordering_frontend/model/entity/store.dart';
+import 'package:owner_ordering_frontend/model/repository/store_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
 
 class StoreViewModel extends ChangeNotifier {
