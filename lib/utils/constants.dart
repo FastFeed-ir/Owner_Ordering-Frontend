@@ -11,14 +11,8 @@ const Color GreenColor = Color(0xff2CBA15);
 
 // Pages
 String LandingPage = "/landingPage";
-String MainMenuPage = "/mainMenuPage";
-String PaymentPage = "/PaymentPage";
-String SelectTablePage = "/selectTablePage";
-String SuccessfulPage = "/successfulPage";
-String InformationsPage = "/informationsPage";
-String CommentsPage = "/commentsPage";
-String ScoringPage = "/scoringPage";
-String SendCommentPage = "/sendCommentPage";
+String Order = "/orders";
+String Loginsignup = "/login&signup";
 //String Page = "/Page";
 
 //Strings, Names, Address
