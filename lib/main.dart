@@ -31,11 +31,11 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           getPages: [
-            GetPage(name: Order, page: () => Orders()),
+            GetPage(name: OrderPage, page: () => Orders()),
             GetPage(name: Loginsignup, page: () => PhoneNumberScreen()),
           ],
           // title: 'FastFeed',
-          initialRoute: Loginsignup,
+          initialRoute: OrderPage,
           textDirection: TextDirection.rtl,
           defaultTransition: Transition.noTransition,
           theme: ThemeData(

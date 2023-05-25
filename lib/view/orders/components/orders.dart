@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:owner_ordering_frontend/model/entity/socketData.dart';
 import 'package:owner_ordering_frontend/utils/constants.dart';
 
+import '../../../model/entity/order.dart';
+import '../../../model/entity/orderItem.dart';
 import '../../../utils/constants.dart';
 
 class Orders extends StatefulWidget {
@@ -11,8 +14,12 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  @override
   // late Orders _model;
+
+  SocketData socketData = SocketData(order: order, orderItem: orderItems);
+
+  // Map<String, dynamic> socketDataJson = socketData.toJson();
+
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -73,7 +80,7 @@ class _OrdersState extends State<Orders> {
           ),
         ),
         appBar: AppBar(),
-
+        body: SizedBox(child: Text(socketData.order.description!),),
       ),
     );
   }
