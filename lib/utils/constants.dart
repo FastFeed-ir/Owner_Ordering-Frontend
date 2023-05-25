@@ -13,6 +13,8 @@ const Color GreenColor = Color(0xff2CBA15);
 String LandingPage = "/landingPage";
 String Order = "/orders";
 String Loginsignup = "/login&signup";
+String RestaurantListPage = "/restaurantListPage";
+String OrderingPage = "/orderingPage";
 //String Page = "/Page";
 
 //Strings, Names, Address
@@ -21,11 +23,12 @@ late String Email ;
 late String Address ;
 late String InstagramPage ;
 // Images
-String FastfeedLogo = "assets/logo.png";
-String Tick = "assets/Tick.png";
-String Zabdar = "assets/zabdar.png";
-String RestaurantLogoDef = "assets/restarauntLogo.png";
-String WhiteLogo = "assets/logo_white.png";
+String FastfeedLogo = "assets/images/logo.png";
+String Tick = "assets/images/Tick.png";
+String Zabdar = "assets/images/zabdar.png";
+String RestaurantLogoDef = "assets/images/restarauntLogo.png";
+String WhiteLogo = "assets/images/logo_white.png";
+String SadFace = "assets/images/sadface.png";
 // Fonts
 String IranSansWeb = "IranSansWeb";
 String FugazOne = "FugazOne";
