@@ -1,4 +1,4 @@
-import '../../../model/entity/subscription_model.dart';
+import '../../../model/entity/subscription.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -27,13 +27,29 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   String? url;
   String? startDate;
 
-  final List<SubscriptionModel> _subs = [
-    SubscriptionModel(business_owner: 1, store: 2, period: 30, amount: 300000),
-    SubscriptionModel(business_owner: 1, store: 3, period: 90, amount: 330000),
+  final List<Subscription> _subs = [
+    Subscription(business_owner: 1, store: 2, period: 30, amount: 300000),
+    Subscription(business_owner: 1, store: 3, period: 90, amount: 330000),
   ];
   final List<Store> _stores = [
-    Store(id: 2,business_owner: 1, title: "زمانه", business_type: 1, state: 4, owner_phone_number: "091356425", telephone_number: "25998", tables_count: 5),
-    Store(id: 3,business_owner: 1, title: "بهانه", business_type: 2, state: 2, owner_phone_number: "252552", telephone_number: "25635", tables_count: 8)
+    Store(
+        id: 2,
+        business_owner: 1,
+        title: "زمانه",
+        business_type: 1,
+        state: 4,
+        owner_phone_number: "091356425",
+        telephone_number: "25998",
+        tables_count: 5),
+    Store(
+        id: 3,
+        business_owner: 1,
+        title: "بهانه",
+        business_type: 2,
+        state: 2,
+        owner_phone_number: "252552",
+        telephone_number: "25635",
+        tables_count: 8)
   ];
   final _subModel = SubscriptionViewModel();
   final _storeModel = StoreViewModel();
@@ -43,7 +59,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   @override
   initState() {
     super.initState();
-  /*  getStore();
+    /*  getStore();
     getSubscripton().then((_) => Timer(Duration(seconds: 5), (){
       setState((){
         _showNoSub = _subs.isEmpty && _stores.isEmpty;
@@ -67,6 +83,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       ),
     );
   }
+
   @override
   Widget restaurantList() {
     if (_subs.isEmpty && _stores.isEmpty) {
@@ -79,6 +96,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       return buildList();
     }
   }
+
   Widget buildList() {
     return Container(
       padding: EdgeInsets.only(
@@ -95,13 +113,28 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
           ListView.builder(
             itemCount: _subs.length,
             shrinkWrap: true,
-            padding: EdgeInsets.only(left: 20, right: 20,top: 15,),
+            padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 15,
+            ),
             itemBuilder: (BuildContext context, int index) {
               // TODO loaing
-              SubscriptionModel subscriptionModel = _subs[index];
-              Store store = Store(business_owner: 0, title: '', business_type: 0, state: 0, owner_phone_number: '', tables_count: 0, telephone_number: '', logo: '', city: '', address: '', instagram_page_link: '');
-              for(var item in _stores) {
-                if(subscriptionModel.store == item.id){
+              Subscription subscriptionModel = _subs[index];
+              Store store = Store(
+                  business_owner: 0,
+                  title: '',
+                  business_type: 0,
+                  state: 0,
+                  owner_phone_number: '',
+                  tables_count: 0,
+                  telephone_number: '',
+                  logo: '',
+                  city: '',
+                  address: '',
+                  instagram_page_link: '');
+              for (var item in _stores) {
+                if (subscriptionModel.store == item.id) {
                   store = item;
                 }
               }
@@ -112,6 +145,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       ),
     );
   }
+
   Widget noSub() {
     return Container(
       padding: EdgeInsets.only(
@@ -140,14 +174,20 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       ),
     );
   }
-  Widget buildListItem(SubscriptionModel subscriptionModel, Store store, int index){
+
+  Widget buildListItem(Subscription subscriptionModel, Store store, int index) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ListTile(
           // ToDo get name from API
-          title: restaurantTitle(store.title, subscriptionModel.startDate,subscriptionModel.period, subscriptionModel.business_owner, subscriptionModel.store),
+          title: restaurantTitle(
+              subscriptionModel.store_title,
+              subscriptionModel.created_at,
+              subscriptionModel.period,
+              subscriptionModel.business_owner,
+              subscriptionModel.store),
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 2),
             borderRadius: BorderRadius.circular(20),
