@@ -1,12 +1,11 @@
-import 'package:owner_ordering_frontend/model/entity/subscription_model.dart';
+import 'package:owner_ordering_frontend/model/entity/subscription.dart';
 
-abstract class SubscriptonRepository{
+abstract class SubscriptonRepository {
+  Future<List<Subscription>> getSubscription(int busineesOwnerId);
 
-  Future<List<SubscriptionModel>> getSubscription(int id);
+  Future<void> addSubscription(Subscription subscription);
 
-  Future<void> addSubscription(SubscriptionModel subscription);
+  Future<void> editSubscription(Subscription subscription);
 
-  Future<void> editSubscription(SubscriptionModel subscription);
-
-  Future<void> deleteSubscription(SubscriptionModel subscription);
+  Future<void> deleteSubscription(Subscription subscription);
 }

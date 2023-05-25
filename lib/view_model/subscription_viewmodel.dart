@@ -1,28 +1,30 @@
 import 'dart:async';
-import 'package:owner_ordering_frontend/model/entity/subscription_model.dart';
+import 'package:owner_ordering_frontend/model/entity/subscription.dart';
 import 'package:owner_ordering_frontend/model/repository/subscription_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
 
-class SubscriptionViewModel extends ChangeNotifier{
+class SubscriptionViewModel extends ChangeNotifier {
   var repository = SubscriptionRepositoryImpl();
-  StreamController<List<SubscriptionModel>> subscriptions =
-  StreamController<List<SubscriptionModel>>();
-  void getSubscriptions(int id) async{
+  StreamController<List<Subscription>> subscriptions =
+      StreamController<List<Subscription>>();
+  void getSubscriptions(int id) async {
     subscriptions.add(await repository.getSubscription(id));
     notifyListeners();
   }
-  Future<SubscriptionModel> addSubscriptions(SubscriptionModel subscription) async{
+
+  Future<Subscription> addSubscriptions(Subscription subscription) async {
     var code = await repository.addSubscription(subscription);
     notifyListeners();
     return code;
   }
-  void editSubscriptions(SubscriptionModel subscription) async{
+
+  void editSubscriptions(Subscription subscription) async {
     repository.editSubscription(subscription);
     notifyListeners();
   }
-  void deleteSubscriptions(SubscriptionModel subscription) async{
+
+  void deleteSubscriptions(Subscription subscription) async {
     repository.deleteSubscription(subscription);
     notifyListeners();
   }
 }
-
