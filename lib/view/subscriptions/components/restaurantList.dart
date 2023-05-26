@@ -1,6 +1,5 @@
 import '../../../model/entity/subscription.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../model/entity/store.dart';
 import '../../../utils/constants.dart';
@@ -28,8 +27,9 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   String? startDate;
 
   final List<Subscription> _subs = [
-    Subscription(business_owner: 1, store: 2, period: 30, amount: 300000),
-    Subscription(business_owner: 1, store: 3, period: 90, amount: 330000),
+    Subscription(store_title: "زمانه",business_owner: 1, store: 2, period: 30, amount: 300000, created_at: "1402/03/02 01:10:03"),
+    Subscription(store_title: "کمانه",business_owner: 1, store: 3, period: 90, amount: 330000, created_at: "1402/03/03 01:10:03"),
+    Subscription(store_title: "شبانه",business_owner: 1, store: 4, period: 180, amount: 330000, created_at: "1402/03/04 01:10:03"),
   ];
   final List<Store> _stores = [
     Store(
@@ -42,14 +42,25 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
         telephone_number: "25998",
         tables_count: 5),
     Store(
-        id: 3,
+        id: 4,
         business_owner: 1,
-        title: "بهانه",
+        title: "شبانه",
         business_type: 2,
         state: 2,
         owner_phone_number: "252552",
         telephone_number: "25635",
-        tables_count: 8)
+        tables_count: 8
+    ),
+    Store(
+        id: 3,
+        business_owner: 1,
+        title: "کمانه",
+        business_type: 2,
+        state: 2,
+        owner_phone_number: "252552",
+        telephone_number: "25635",
+        tables_count: 8
+    ),
   ];
   final _subModel = SubscriptionViewModel();
   final _storeModel = StoreViewModel();
@@ -73,13 +84,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       child: Scaffold(
         backgroundColor: WhiteColor,
         appBar: AppBarMenu(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SingleChildScrollView(child: restaurantList()),
-            ],
-          ),
-        ),
+        body: restaurantList(),
       ),
     );
   }
@@ -98,28 +103,18 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   }
 
   Widget buildList() {
-    return Container(
+    return ListView(
+      shrinkWrap: true,
       padding: EdgeInsets.only(
-        left: 24.0,
-        top: 50.0,
-        right: 24.0,
+        left: 20,
+        right: 20,
+        top: 15,
       ),
-      width: 1920,
-      //height: ((300 * _subs.length) + 300).h,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ListView.builder(
-            itemCount: _subs.length,
-            shrinkWrap: true,
-            padding: EdgeInsets.only(
-              left: 20,
-              right: 20,
-              top: 15,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              // TODO loaing
+      children: [
+        Column(
+          children: List.generate(
+            _subs.length,
+            (index) {
               Subscription subscriptionModel = _subs[index];
               Store store = Store(
                   business_owner: 0,
@@ -138,11 +133,16 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                   store = item;
                 }
               }
-              return buildListItem(subscriptionModel, store, index);
+              return Column(
+                children: [
+                  buildListItem(subscriptionModel, store, index),
+                  SizedBox(height: 30,),
+                ],
+              );
             },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -176,27 +176,29 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   }
 
   Widget buildListItem(Subscription subscriptionModel, Store store, int index) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ListTile(
-          // ToDo get name from API
-          title: restaurantTitle(
-              subscriptionModel.store_title,
-              subscriptionModel.created_at,
-              subscriptionModel.period,
-              subscriptionModel.business_owner,
-              subscriptionModel.store),
-          shape: RoundedRectangleBorder(
-            side: BorderSide(width: 2),
-            borderRadius: BorderRadius.circular(20),
-          ),
+    return Container(
+      // ToDo get name from API
+      padding: EdgeInsets.only(right: 20, left: 10, bottom: 30),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: BlackColor,
+          width: 1.0,
         ),
-        SizedBox(
-          height: 30.h,
-        ),
-      ],
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+
+      /*shape: RoundedRectangleBorder(
+        side: BorderSide(width: 2),
+        borderRadius: ,
+      ),*/
+      // ToDo get name from API
+      child: restaurantTitle(
+          subscriptionModel.store_title,
+          subscriptionModel.created_at,
+          subscriptionModel.period,
+          subscriptionModel.business_owner,
+          subscriptionModel.store
+      ),
     );
   }
 /*  Future<void> getSubscripton() async {
