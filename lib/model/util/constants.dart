@@ -1,6 +1,11 @@
 import 'package:dio/dio.dart';
 
-const baseUrl = 'http://87.107.146.132:8050/';
+const ip = "87.107.146.132";
+const socketPort = "5000";
+const apiServerPort = "8050";
+
+const baseUrl = 'http://$ip:$apiServerPort/';
+const socketUrl = 'http://$ip:$socketPort/';
 
 final options = BaseOptions(
   baseUrl: baseUrl,
