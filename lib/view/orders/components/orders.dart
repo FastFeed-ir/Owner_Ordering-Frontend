@@ -4,9 +4,9 @@ import 'package:owner_ordering_frontend/utils/constants.dart';
 
 import '../../../model/entity/order.dart';
 import '../../../model/entity/orderItem.dart';
+import '../../../model/repository/socket_service.dart';
 import '../../../utils/constants.dart';
 import './currentOrder.dart';
-
 
 class Orders extends StatefulWidget {
   const Orders({Key? key}) : super(key: key);
@@ -18,9 +18,7 @@ class Orders extends StatefulWidget {
 class _OrdersState extends State<Orders> {
   // late Orders _model;
 
-
   // Map<String, dynamic> socketDataJson = socketData.toJson();
-
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -31,9 +29,9 @@ class _OrdersState extends State<Orders> {
 
   @override
   void dispose() {
-
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -54,18 +52,11 @@ class _OrdersState extends State<Orders> {
                   onPressed: () {
                     print('Button pressed ...');
                   },
-                  child: Text('سفارش ها',style: TextStyle(color: BlackColor),),
-                ),
-                Divider(
-                  thickness: 1,
-                  color: BlackColor,
-                ),
-                TextButton(
-                  onPressed: () {
-                    print('Button pressed ...');
-                  },
-                  child: Text('تغییر منو',style: TextStyle(color: BlackColor),),
+                  child: Text(
+                    'سفارش ها',
+                    style: TextStyle(color: BlackColor),
                   ),
+                ),
                 Divider(
                   thickness: 1,
                   color: BlackColor,
@@ -74,40 +65,59 @@ class _OrdersState extends State<Orders> {
                   onPressed: () {
                     print('Button pressed ...');
                   },
-                  child: Text('خروج',style: TextStyle(color: BlackColor),),
+                  child: Text(
+                    'تغییر منو',
+                    style: TextStyle(color: BlackColor),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                  color: BlackColor,
+                ),
+                TextButton(
+                  onPressed: () {
+                    print('Button pressed ...');
+                  },
+                  child: Text(
+                    'خروج',
+                    style: TextStyle(color: BlackColor),
+                  ),
                 ),
               ],
             ),
           ),
         ),
         appBar: AppBar(),
-        body: SizedBox(child: _OrderBody(),),
+        body: SizedBox(
+          child: _OrderBody(),
+        ),
       ),
     );
   }
 }
+
 class _OrderBody extends StatelessWidget {
   const _OrderBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SocketData socketData = SocketData(order: order, orderItem: orderItems);
-    var orders = <Order>[];
+    var orders = <SocketData>[];
     ScrollController _scrollController = ScrollController();
 
     void _scrollDown() {
       try {
         Future.delayed(
             const Duration(milliseconds: 300),
-                () => _scrollController
+            () => _scrollController
                 .jumpTo(_scrollController.position.maxScrollExtent));
       } on Exception catch (_) {}
     }
 
     return Expanded(
       child: StreamBuilder(
-        // stream: SocketService.getResponse,
-        builder: (BuildContext context, AsyncSnapshot<Order> snapshot) {
+        stream: SocketService.getResponse,
+        builder: (BuildContext context, AsyncSnapshot<SocketData> snapshot) {
           if (snapshot.connectionState == ConnectionState.none) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -126,5 +136,3 @@ class _OrderBody extends StatelessWidget {
     );
   }
 }
-
-
