@@ -5,6 +5,7 @@ class Order {
   String? description;
   String? createdAt;
   int? authCode;
+  int? total;
 
   Order({
     this.id,
