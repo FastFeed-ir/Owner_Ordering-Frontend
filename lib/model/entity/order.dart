@@ -5,7 +5,6 @@ class Order {
   String? description;
   String? createdAt;
   int? authCode;
-  int? total;
 
   Order({
     this.id,
@@ -28,10 +27,10 @@ class Order {
   }
 
   Map<String, dynamic> toJson() => {
-    'store': storeId,
-    'table_number': tableNumber,
-    'description': description,
-    'created_at': createdAt,
-    'auth_code': authCode,
-  };
+        'store': storeId,
+        'table_number': tableNumber,
+        'description': description,
+        'created_at': createdAt,
+        'auth_code': authCode,
+      };
 }
