@@ -7,11 +7,10 @@ import '../model/entity/order.dart';
 class OrderViewModel extends ChangeNotifier {
   var repository = OrderRepositoryImpl();
 
-  StreamController<double> totalPrice = StreamController<double>();
+  double totalPrice= 0.0;
 
   void getTotal(int orderId) async {
-    totalPrice =
-        (await repository.getTotal(orderId)) as StreamController<double>;
+    totalPrice = await repository.getTotal(orderId);
     notifyListeners();
   }
 }

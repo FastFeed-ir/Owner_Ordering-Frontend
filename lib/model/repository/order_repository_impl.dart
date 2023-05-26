@@ -8,7 +8,7 @@ class OrderRepositoryImpl extends OrderRepository {
     print('response: ${response.statusMessage}');
     if (response.statusCode == 200) {
       final data = response.data;
-      double total = data('total_price');
+      double total = data['total_price'];
       //check it maybe need to casting
       return total;
     } else {
