@@ -3,11 +3,13 @@ import 'order_repository.dart';
 
 class OrderRepositoryImpl extends OrderRepository {
   @override
-  Future<int> getTotal(int id) async {
-    var response = await dio.get('orders/$id/total/');
+  Future<double> getTotal(int orderId) async {
+    var response = await dio.get('orders/$orderId/total/');
     print('response: ${response.statusMessage}');
-    if (response.data is int) {
-      int total = response.data;
+    if (response.statusCode == 200) {
+      final data = response.data;
+      double total = data('total_price');
+      //check it maybe need to casting
       return total;
     } else {
       throw Exception('Invalid response');
