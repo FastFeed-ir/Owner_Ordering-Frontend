@@ -27,27 +27,29 @@ class _CurrentOrderState extends State<CurrentOrder> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      margin: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+      margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+      decoration: BoxDecoration(border: Border.all(width: 5),borderRadius: BorderRadius.circular(5)),
+      padding: EdgeInsets.fromLTRB(5,10,5,10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            widget.socketData.order.tableNumber.toString() + "میز:",
-            textAlign: TextAlign.right,
+            "میز: "+widget.socketData.order.tableNumber.toString(),
+            textAlign: TextAlign.left,
             style: const TextStyle(
                 fontFamily: "iransans",
-                fontSize: 10,
+                fontSize: 15,
                 fontWeight: FontWeight.bold),
           ),
           Container(
+            decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(5)),
+            padding: EdgeInsets.fromLTRB(5,5,5,5),
             child: Column(
               children: [
                 ListView.builder(
                     itemCount: widget.socketData.orderItem.length,
                     shrinkWrap: true,
-                    padding: EdgeInsets.only(
-                      left: 700,
-                    ),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
                         children: [
@@ -58,83 +60,105 @@ class _CurrentOrderState extends State<CurrentOrder> {
                                   .socketData.orderItem[index].productTitle!),
                               Text(widget
                                   .socketData.orderItem[index].productUnitPrice
-                                  .toString()),
+                                  .toString()+" تومان"),
                             ],
-                          ),
-                          SizedBox(
-                            height: 10,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(widget.socketData.orderItem[index].quantity
-                                  .toString()),
+                              Text("X"+widget.socketData.orderItem[index].quantity
+                                  .toString(),style: TextStyle(backgroundColor: YellowColor,fontFamily: "iransans",),),
                               Text((widget.socketData.orderItem[index]
                                           .productUnitPrice! *
                                       widget
                                           .socketData.orderItem[index].quantity)
-                                  .toString()),
+                                  .toString()+" تومان"),
                             ],
+                          ),
+                          const Divider(
+                            thickness: 1,
+                            color: BlackColor,
                           ),
                         ],
                       );
                     }),
-                Row(children: [
-                  Text(widget.socketData.order.description!),
-                ]),
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    child:
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("توضیحات:"),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(widget.socketData.order.description!),
+                            ],
+                          ),
+                        ],
+                      ),
+                  ),
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("مبلغ قابل پرداخت: "),
-                    Text(_orderViewModel.totalPrice as String),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: YellowColor,
-                          fixedSize: Size.fromWidth(150),
-                        ),
-                        child: Text(
-                          'بستن',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontFamily: "IranSansWeb",
-                          ),
-                        ),
-                        onPressed: () async {
-                          //TODO close order
-                        }),
-                    TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: YellowColor,
-                          fixedSize: Size.fromWidth(150),
-                        ),
-                        child: Text(
-                          'لغو',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontFamily: "IranSansWeb",
-                          ),
-                        ),
-                        onPressed: () async {
-                          //TODO cancel order
-                        }),
-                  ],
-                )
               ],
             ),
           ),
+          Container(
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("مبلغ قابل پرداخت: ",style: TextStyle(fontFamily: "iransans",fontWeight: FontWeight.bold)),
+                Text(_orderViewModel.totalPrice.toString(),style: TextStyle(fontFamily: "iransans",fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: YellowColor,
+                      fixedSize: Size.fromWidth(100),
+                    ),
+                    child: Text(
+                      'بستن',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontFamily: "IranSansWeb",
+                      ),
+                    ),
+                    onPressed: () async {
+                      //TODO close order
+                    }),
+                TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: YellowColor,
+                      fixedSize: Size.fromWidth(100),
+                    ),
+                    child: Text(
+                      'لغو',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontFamily: "IranSansWeb",
+                      ),
+                    ),
+                    onPressed: () async {
+                      //TODO cancel order
+                    }),
+              ],
+            ),
+          )
         ],
       ),
     );
