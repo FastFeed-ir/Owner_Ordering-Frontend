@@ -3,10 +3,26 @@ import 'package:flutter/material.dart';
 import '../../../model/entity/orderItem.dart';
 import '../../../model/entity/socketData.dart';
 import '../../../utils/constants.dart';
+import '../../../view_model/order_viewmodel.dart';
 
-class CurrentOrder extends StatelessWidget {
+class CurrentOrder extends StatefulWidget {
   final SocketData socketData;
-  const CurrentOrder({Key? key, required this.socketData}) : super(key: key);
+
+  CurrentOrder({Key? key, required this.socketData}) : super(key: key);
+
+  @override
+  State<CurrentOrder> createState() => _CurrentOrderState();
+}
+
+class _CurrentOrderState extends State<CurrentOrder> {
+  @override
+  void initState() {
+    _orderViewModel.getTotal(widget.socketData.order.id!);
+    super.initState();
+  }
+
+  final _orderViewModel = OrderViewModel();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -16,7 +32,7 @@ class CurrentOrder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            socketData.order.tableNumber.toString() + "میز:",
+            widget.socketData.order.tableNumber.toString() + "میز:",
             textAlign: TextAlign.right,
             style: const TextStyle(
                 fontFamily: "iransans",
@@ -27,7 +43,7 @@ class CurrentOrder extends StatelessWidget {
             child: Column(
               children: [
                 ListView.builder(
-                    itemCount: socketData.orderItem.length,
+                    itemCount: widget.socketData.orderItem.length,
                     shrinkWrap: true,
                     padding: EdgeInsets.only(
                       left: 700,
@@ -38,8 +54,10 @@ class CurrentOrder extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(socketData.orderItem[index].productTitle!),
-                              Text(socketData.orderItem[index].productUnitPrice
+                              Text(widget
+                                  .socketData.orderItem[index].productTitle!),
+                              Text(widget
+                                  .socketData.orderItem[index].productUnitPrice
                                   .toString()),
                             ],
                           ),
@@ -49,11 +67,12 @@ class CurrentOrder extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(socketData.orderItem[index].quantity
+                              Text(widget.socketData.orderItem[index].quantity
                                   .toString()),
-                              Text((socketData
-                                          .orderItem[index].productUnitPrice! *
-                                      socketData.orderItem[index].quantity)
+                              Text((widget.socketData.orderItem[index]
+                                          .productUnitPrice! *
+                                      widget
+                                          .socketData.orderItem[index].quantity)
                                   .toString()),
                             ],
                           ),
@@ -61,7 +80,7 @@ class CurrentOrder extends StatelessWidget {
                       );
                     }),
                 Row(children: [
-                  Text(socketData.order.description!),
+                  Text(widget.socketData.order.description!),
                 ]),
                 SizedBox(
                   height: 10,
@@ -70,7 +89,7 @@ class CurrentOrder extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("مبلغ قابل پرداخت: "),
-                    Text("order.total"),
+                    Text(_orderViewModel.totalPrice as String),
                   ],
                 ),
                 SizedBox(
