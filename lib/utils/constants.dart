@@ -20,7 +20,7 @@ String Loginsignup = "/login&signup";
 //String Page = "/Page";
 Map<String, dynamic> orderJson = {
   'id': 1,
-  'store': 123,
+  'store': 1,
   'table_number': 4,
   'description': 'Dummy order',
   'created_at_time': '2023-05-25 10:00:00',
@@ -52,6 +52,7 @@ List<OrderItem> orderItems = orderItemsJson
     .map((json) => OrderItem.fromJson(json))
     .toList();
 
+SocketData socketData1 =SocketData(order: order, orderItem: orderItems);
 
 //Strings, Names, Address
 late String Phone ;
