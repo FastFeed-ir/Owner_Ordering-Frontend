@@ -104,7 +104,7 @@ class _OrdersState extends State<Orders> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     _OrderBody(),
-                    SizedBox(height: 6),
+                    SizedBox(height: 8),
                   ],
                 ),
               ),
@@ -120,8 +120,8 @@ class _OrderBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SocketData socketData = SocketData(order: order, orderItem: orderItems);
-    var currentOrders = <SocketData>[];
-    var passedOrders = <SocketData>[];
+    // var currentOrders = <SocketData>[];
+    // var passedOrders = <SocketData>[];
     ScrollController _scrollController = ScrollController();
 
     void _scrollDown() {
@@ -146,7 +146,9 @@ class _OrderBody extends StatelessWidget {
           // _scrollDown();
           return Column(
             children: [
-              Text("جاری"),
+              Text("جاری",style: TextStyle(fontFamily: "iransans",
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),),
               Expanded(
                 child: ListView.builder(
                   // controller: _scrollController,
@@ -158,7 +160,9 @@ class _OrderBody extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text("گذشته"),
+              Text("گذشته",style: TextStyle(fontFamily: "iransans",
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),),
               Expanded(
                 child: ListView.builder(
                   // controller: _scrollController,
