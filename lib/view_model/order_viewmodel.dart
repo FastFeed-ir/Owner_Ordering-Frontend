@@ -8,9 +8,17 @@ class OrderViewModel extends ChangeNotifier {
   var repository = OrderRepositoryImpl();
 
   double totalPrice= 0.0;
+  StreamController<List<Order>> orders =
+  StreamController<List<Order>>();
+
+  void deleteOrder(Order order) async {
+    repository.deleteOrder(order);
+    notifyListeners();
+  }
 
   void getTotal(int orderId) async {
     totalPrice = await repository.getTotal(orderId);
     notifyListeners();
   }
+
 }
