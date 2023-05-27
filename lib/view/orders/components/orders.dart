@@ -15,7 +15,8 @@ class Orders extends StatefulWidget {
   @override
   State<Orders> createState() => _OrdersState();
 }
-
+var currentOrders = <SocketData>[];
+var passedOrders = <SocketData>[];
 class _OrdersState extends State<Orders> {
   // late Orders _model;
 
@@ -23,6 +24,7 @@ class _OrdersState extends State<Orders> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -120,8 +122,7 @@ class _OrderBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SocketData socketData = SocketData(order: order, orderItem: orderItems);
-    // var currentOrders = <SocketData>[];
-    // var passedOrders = <SocketData>[];
+
     ScrollController _scrollController = ScrollController();
 
     void _scrollDown() {

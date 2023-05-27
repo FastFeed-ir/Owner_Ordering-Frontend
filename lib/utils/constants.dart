@@ -54,8 +54,6 @@ List<OrderItem> orderItems = orderItemsJson
 
 SocketData socketData1 =SocketData(order: order, orderItem: orderItems);
 
-var currentOrders = <SocketData>[];
-var passedOrders = <SocketData>[];
 //Strings, Names, Address
 late String Phone ;
 late String Email ;

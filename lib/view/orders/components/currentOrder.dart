@@ -5,6 +5,7 @@ import '../../../model/entity/orderItem.dart';
 import '../../../model/entity/socketData.dart';
 import '../../../utils/constants.dart';
 import '../../../view_model/order_viewmodel.dart';
+import './orders.dart' as ord;
 
 class CurrentOrder extends StatefulWidget {
   final SocketData socketData;
@@ -140,10 +141,10 @@ class _CurrentOrderState extends State<CurrentOrder> {
                       ),
                     ),
                     onPressed: () async {
-                      print(passedOrders.length);
-                      passedOrders.add(widget.socketData);
-                      print(passedOrders.length);
-                      currentOrders.remove(widget.socketData);
+                      print(ord.passedOrders.length);
+                      ord.passedOrders.add(widget.socketData);
+                      print(ord.passedOrders.length);
+                      ord.currentOrders.remove(widget.socketData);
                     }),
                 TextButton(
                     style: TextButton.styleFrom(
