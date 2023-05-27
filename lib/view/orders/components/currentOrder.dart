@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:owner_ordering_frontend/view_model/orderItem_viewmodel.dart';
 
 import '../../../model/entity/orderItem.dart';
 import '../../../model/entity/socketData.dart';
@@ -22,6 +23,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
   }
 
   final _orderViewModel = OrderViewModel();
+  final _orderItemViewModel = OrderItemViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +140,10 @@ class _CurrentOrderState extends State<CurrentOrder> {
                       ),
                     ),
                     onPressed: () async {
-                      //TODO close order
+                      print(passedOrders.length);
+                      passedOrders.add(widget.socketData);
+                      print(passedOrders.length);
+                      currentOrders.remove(widget.socketData);
                     }),
                 TextButton(
                     style: TextButton.styleFrom(
@@ -155,6 +160,10 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     ),
                     onPressed: () async {
                       //TODO cancel order
+                        _orderViewModel.deleteOrder(widget.socketData.order);
+                        for(var i in widget.socketData.orderItem){
+                          _orderItemViewModel.deleteOrderItem(i);
+                        }
                     }),
               ],
             ),
