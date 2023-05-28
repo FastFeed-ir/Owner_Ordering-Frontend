@@ -17,7 +17,7 @@ class PassedOrder extends StatefulWidget {
 class _PassedOrderState extends State<PassedOrder> {
   @override
   void initState() {
-    _orderViewModel.getTotal(widget.socketData.order.id!);
+    _orderViewModel.getTotal(3);
     super.initState();
   }
 
@@ -70,9 +70,9 @@ class _PassedOrderState extends State<PassedOrder> {
                               Text(widget.socketData.orderItem[index].quantity
                                   .toString()),
                               Text((widget.socketData.orderItem[index]
-                                  .productUnitPrice! *
-                                  widget
-                                      .socketData.orderItem[index].quantity)
+                                          .productUnitPrice! *
+                                      widget
+                                          .socketData.orderItem[index].quantity)
                                   .toString()),
                             ],
                           ),

@@ -15,8 +15,10 @@ class Orders extends StatefulWidget {
   @override
   State<Orders> createState() => _OrdersState();
 }
+
 var currentOrders = <SocketData>[];
 var passedOrders = <SocketData>[];
+
 class _OrdersState extends State<Orders> {
   // late Orders _model;
 
@@ -28,13 +30,9 @@ class _OrdersState extends State<Orders> {
   @override
   void initState() {
     super.initState();
-
-
-    setState(() {
-      SocketService.sendOrder(socketData1);
-      SocketService.sendOrder(socketData1);
-      SocketService.sendOrder(socketData1);
-    });
+    SocketService.sendOrder(socketData1);
+    SocketService.sendOrder(socketData1);
+    SocketService.sendOrder(socketData1);
   }
 
   @override
@@ -104,8 +102,8 @@ class _OrdersState extends State<Orders> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    _OrderBody(),
+                  children: [
+                    _OrderBody(socketDataStream: SocketService.getResponse),
                     SizedBox(height: 8),
                   ],
                 ),
@@ -116,27 +114,42 @@ class _OrdersState extends State<Orders> {
   }
 }
 
-class _OrderBody extends StatelessWidget {
-  const _OrderBody({Key? key}) : super(key: key);
+class _OrderBody extends StatefulWidget {
+  final Stream<SocketData> socketDataStream;
 
+  const _OrderBody({Key? key, required this.socketDataStream})
+      : super(key: key);
+
+  @override
+  State<_OrderBody> createState() => _OrderBodyState();
+}
+
+class _OrderBodyState extends State<_OrderBody> {
   @override
   Widget build(BuildContext context) {
     SocketData socketData = SocketData(order: order, orderItem: orderItems);
 
     ScrollController _scrollController = ScrollController();
+    void closeOrder(SocketData socketData) {
+      setState(() {
+        currentOrders.remove(socketData);
+        passedOrders.add(socketData);
+      });
+    }
 
     void _scrollDown() {
       try {
         Future.delayed(
           const Duration(milliseconds: 300),
-              () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent),
+          () => _scrollController
+              .jumpTo(_scrollController.position.maxScrollExtent),
         );
       } on Exception catch (_) {}
     }
 
     return Expanded(
       child: StreamBuilder(
-        stream: SocketService.getResponse,
+        stream: widget.socketDataStream,
         builder: (BuildContext context, AsyncSnapshot<SocketData> snapshot) {
           if (snapshot.connectionState == ConnectionState.none) {
             return const Center(child: CircularProgressIndicator());
@@ -147,23 +160,34 @@ class _OrderBody extends StatelessWidget {
           // _scrollDown();
           return Column(
             children: [
-              Text("جاری",style: TextStyle(fontFamily: "iransans",
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),),
+              const Text(
+                "جاری",
+                style: TextStyle(
+                    fontFamily: "iransans",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
               Expanded(
                 child: ListView.builder(
                   // controller: _scrollController,
                   itemCount: currentOrders.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      CurrentOrder(socketData: socketData),
+                      CurrentOrder(
+                    socketData: socketData,
+                    onClose: closeOrder,
+                  ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text("گذشته",style: TextStyle(fontFamily: "iransans",
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),),
+              const Text(
+                "گذشته",
+                style: TextStyle(
+                    fontFamily: "iransans",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
               Expanded(
                 child: ListView.builder(
                   // controller: _scrollController,
@@ -179,4 +203,3 @@ class _OrderBody extends StatelessWidget {
     );
   }
 }
-
