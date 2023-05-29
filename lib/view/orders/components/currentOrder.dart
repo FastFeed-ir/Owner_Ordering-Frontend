@@ -27,7 +27,13 @@ class _CurrentOrderState extends State<CurrentOrder> {
 
   final _orderViewModel = OrderViewModel();
   final _orderItemViewModel = OrderItemViewModel();
-
+  double totalCount(List<OrderItem> orderItem){
+    double total=0;
+    for(var i in orderItem){
+      total += i.quantity * i.productUnitPrice!;
+    }
+    return total;
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -129,7 +135,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                 const Text("مبلغ قابل پرداخت: ",
                     style: TextStyle(
                         fontFamily: "iransans", fontWeight: FontWeight.bold)),
-                Text(_orderViewModel.totalPrice.toString(),
+                Text(totalCount(widget.socketData.orderItem).toString(),
                     style: const TextStyle(
                         fontFamily: "iransans", fontWeight: FontWeight.bold)),
               ],
