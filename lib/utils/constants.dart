@@ -65,6 +65,7 @@ String Tick = "assets/Tick.png";
 String Zabdar = "assets/zabdar.png";
 String RestaurantLogoDef = "assets/restarauntLogo.png";
 String WhiteLogo = "assets/logo_white.png";
+String BlackLogo = "assets/logo_black.png";
 // Fonts
 String IranSansWeb = "IranSansWeb";
 String FugazOne = "FugazOne";
