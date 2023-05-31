@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../../model/entity/subscription.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +10,7 @@ import '../../../view_model/subscription_viewmodel.dart';
 import 'restaurant_style.dart';
 
 class RestaurantListScreen extends StatefulWidget {
-  var owner = Get.arguments;
+  var ownerId = Get.arguments;
 
   RestaurantListScreen({
     Key? key,
@@ -19,49 +21,15 @@ class RestaurantListScreen extends StatefulWidget {
 }
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
-  int? id;
+  late int id ;
   late int storeId;
   late int period;
   late double amount;
   String? url;
   String? startDate;
 
-  final List<Subscription> _subs = [
-    Subscription(store_title: "زمانه",business_owner: 1, store: 2, period: 30, amount: 300000, created_at: "1402/03/02 01:10:03"),
-    Subscription(store_title: "کمانه",business_owner: 1, store: 3, period: 90, amount: 330000, created_at: "1402/03/03 01:10:03"),
-    Subscription(store_title: "شبانه",business_owner: 1, store: 4, period: 180, amount: 330000, created_at: "1402/03/04 01:10:03"),
-  ];
-  final List<Store> _stores = [
-    Store(
-        id: 2,
-        business_owner: 1,
-        title: "زمانه",
-        business_type: 1,
-        state: 4,
-        owner_phone_number: "091356425",
-        telephone_number: "25998",
-        tables_count: 5),
-    Store(
-        id: 4,
-        business_owner: 1,
-        title: "شبانه",
-        business_type: 2,
-        state: 2,
-        owner_phone_number: "252552",
-        telephone_number: "25635",
-        tables_count: 8
-    ),
-    Store(
-        id: 3,
-        business_owner: 1,
-        title: "کمانه",
-        business_type: 2,
-        state: 2,
-        owner_phone_number: "252552",
-        telephone_number: "25635",
-        tables_count: 8
-    ),
-  ];
+  final List<Subscription> _subs = [];
+  final List<Store> _stores = [];
   final _subModel = SubscriptionViewModel();
   final _storeModel = StoreViewModel();
 
@@ -70,12 +38,13 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   @override
   initState() {
     super.initState();
-    /*  getStore();
+    id = widget.ownerId;
+    getStore();
     getSubscripton().then((_) => Timer(Duration(seconds: 5), (){
       setState((){
         _showNoSub = _subs.isEmpty && _stores.isEmpty;
       });
-    }));*/
+    }));
   }
 
   @override
@@ -108,7 +77,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       padding: EdgeInsets.only(
         left: 20,
         right: 20,
-        top: 15,
+        top: 30,
       ),
       children: [
         Column(
@@ -186,12 +155,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
         ),
         borderRadius: BorderRadius.circular(30.0),
       ),
-
-      /*shape: RoundedRectangleBorder(
-        side: BorderSide(width: 2),
-        borderRadius: ,
-      ),*/
-      // ToDo get name from API
       child: restaurantTitle(
           subscriptionModel.store_title,
           subscriptionModel.created_at,
@@ -201,8 +164,8 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       ),
     );
   }
-/*  Future<void> getSubscripton() async {
-    _subModel.getSubscriptions(widget.owner.id!);
+  Future<void> getSubscripton() async {
+    _subModel.getSubscriptions(id);
     _subModel.subscriptions.stream.listen((list) {
       setState(() {
         _subs.addAll(list);
@@ -211,11 +174,11 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   }
 
   void getStore() {
-    _storeModel.getStores(widget.owner.id!);
+    _storeModel.getStores(id);
     _storeModel.stores.stream.listen((list) {
       setState(() {
         _stores.addAll(list);
       });
     });
-  }*/
+  }
 }
