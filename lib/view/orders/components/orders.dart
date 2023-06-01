@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:owner_ordering_frontend/model/entity/socketData.dart';
 import 'package:owner_ordering_frontend/utils/constants.dart';
 
-import '../../../model/entity/order.dart';
-import '../../../model/entity/orderItem.dart';
 import '../../../model/repository/socket_service.dart';
-import '../../../utils/constants.dart';
 import './currentOrder.dart';
 import './passedOrder.dart';
 
@@ -20,19 +19,12 @@ var currentOrders = <SocketData>[];
 var passedOrders = <SocketData>[];
 
 class _OrdersState extends State<Orders> {
-  // late Orders _model;
-
-  // Map<String, dynamic> socketDataJson = socketData.toJson();
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    SocketService.sendOrder(socketData1);
-    SocketService.sendOrder(socketData1);
-    SocketService.sendOrder(socketData1);
   }
 
   @override
@@ -42,6 +34,7 @@ class _OrdersState extends State<Orders> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(360, 800));
     return GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
         child: Scaffold(
@@ -127,8 +120,6 @@ class _OrderBody extends StatefulWidget {
 class _OrderBodyState extends State<_OrderBody> {
   @override
   Widget build(BuildContext context) {
-    SocketData socketData = SocketData(order: order, orderItem: orderItems);
-
     ScrollController _scrollController = ScrollController();
     void closeOrder(SocketData socketData) {
       setState(() {
@@ -167,14 +158,17 @@ class _OrderBodyState extends State<_OrderBody> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
-              Expanded(
-                child: ListView.builder(
-                  // controller: _scrollController,
-                  itemCount: currentOrders.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      CurrentOrder(
-                    socketData: socketData,
-                    onClose: closeOrder,
+              SizedBox(
+                height: context.height * 0.72,
+                child: Expanded(
+                  child: ListView.builder(
+                    // controller: _scrollController,
+                    itemCount: currentOrders.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        CurrentOrder(
+                      socketData: currentOrders[index],
+                      onClose: closeOrder,
+                    ),
                   ),
                 ),
               ),
@@ -193,7 +187,7 @@ class _OrderBodyState extends State<_OrderBody> {
                   // controller: _scrollController,
                   itemCount: passedOrders.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      PassedOrder(socketData: socketData),
+                      PassedOrder(socketData: passedOrders[index]),
                 ),
               ),
             ],
