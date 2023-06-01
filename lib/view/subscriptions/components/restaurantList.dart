@@ -156,7 +156,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
         borderRadius: BorderRadius.circular(30.0),
       ),
       child: restaurantTitle(
-          subscriptionModel.store_title,
+          store.title,
           subscriptionModel.created_at,
           subscriptionModel.period,
           subscriptionModel.business_owner,
