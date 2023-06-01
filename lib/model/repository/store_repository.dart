@@ -1,7 +1,7 @@
 import 'package:owner_ordering_frontend/model/entity/store.dart';
 
 abstract class StoreRepository{
-  Future<List<Store>> getStores(int id);
+  Future<List<Store>> getStores(int busineesOwnerId);
 
   Future<Store> addStore(Store store);
 

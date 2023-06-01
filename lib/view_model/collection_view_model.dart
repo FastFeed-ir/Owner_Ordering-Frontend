@@ -13,13 +13,13 @@ class CollectionViewModel extends ChangeNotifier {
       StreamController<List<Collection>>();
   StreamController<List<Product>> products = StreamController<List<Product>>();
 
-  void getCollections() async {
-    collections.add(await repository.getCollections());
+  void getCollections(int storeId) async {
+    collections.add(await repository.getCollections(storeId));
     notifyListeners();
   }
 
-  void getProducts() async {
-    products.add(await repository.getProducts());
+  void getProducts(int storId) async {
+    products.add(await repository.getProducts(storId));
     notifyListeners();
   }
 
