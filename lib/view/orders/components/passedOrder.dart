@@ -6,18 +6,16 @@ import '../../../model/entity/socketData.dart';
 import '../../../utils/constants.dart';
 import '../../../view_model/order_viewmodel.dart';
 
-class CurrentOrder extends StatefulWidget {
+class PassedOrder extends StatefulWidget {
   final SocketData socketData;
 
-  final Function(SocketData) onClose;
+  PassedOrder({Key? key, required this.socketData}) : super(key: key);
 
-  CurrentOrder({Key? key, required this.socketData, required this.onClose})
-      : super(key: key);
   @override
-  State<CurrentOrder> createState() => _CurrentOrderState();
+  State<PassedOrder> createState() => _PassedOrderState();
 }
 
-class _CurrentOrderState extends State<CurrentOrder> {
+class _PassedOrderState extends State<PassedOrder> {
   @override
   void initState() {
     _orderViewModel.getTotal(3);
@@ -27,13 +25,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
 
   final _orderViewModel = OrderViewModel();
   final _orderItemViewModel = OrderItemViewModel();
-  double totalCount(List<OrderItem> orderItem){
-    double total=0;
-    for(var i in orderItem){
-      total += i.quantity * i.productUnitPrice!;
-    }
-    return total;
-  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -135,7 +127,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                 const Text("مبلغ قابل پرداخت: ",
                     style: TextStyle(
                         fontFamily: "iransans", fontWeight: FontWeight.bold)),
-                Text(totalCount(widget.socketData.orderItem).toString(),
+                Text(_orderViewModel.totalPrice.toString(),
                     style: const TextStyle(
                         fontFamily: "iransans", fontWeight: FontWeight.bold)),
               ],
@@ -144,51 +136,6 @@ class _CurrentOrderState extends State<CurrentOrder> {
           const SizedBox(
             height: 10,
           ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: YellowColor,
-                    fixedSize: const Size.fromWidth(100),
-                  ),
-                  child: const Text(
-                    'بستن',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                      fontFamily: "IranSansWeb",
-                    ),
-                  ),
-                  onPressed: () async {
-                    widget.onClose(widget.socketData);
-                  },
-                ),
-                TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: YellowColor,
-                      fixedSize: const Size.fromWidth(100),
-                    ),
-                    child: const Text(
-                      'لغو',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontFamily: "IranSansWeb",
-                      ),
-                    ),
-                    onPressed: () async {
-                      //TODO cancel order
-                      _orderViewModel.deleteOrder(widget.socketData.order);
-                      for (var i in widget.socketData.orderItem) {
-                        _orderItemViewModel.deleteOrderItem(i);
-                      }
-                    }),
-              ],
-            ),
-          )
         ],
       ),
     );

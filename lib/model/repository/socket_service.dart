@@ -27,7 +27,7 @@ class SocketService {
     });
   }
 
-  void sendOrder(SocketData socketData) {
+  static void sendOrder(SocketData socketData) {
     _socket.emit('message', {'data': socketData.toJson(), 'code': _code});
   }
 

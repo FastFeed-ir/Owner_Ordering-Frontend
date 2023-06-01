@@ -10,6 +10,7 @@ import 'package:owner_ordering_frontend/view/customerLogin/components/login&sign
 import 'package:owner_ordering_frontend/view/orders/components/orders.dart';
 
 import 'firebase_options.dart';
+import 'model/repository/socket_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SocketService.setCode("1");
+    SocketService.connectAndListen();
     return ScreenUtilInit(
       designSize: const Size(1920.0, 1080.0),
       minTextAdapt: true,
