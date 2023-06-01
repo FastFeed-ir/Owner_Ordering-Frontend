@@ -23,12 +23,10 @@ class SocketService {
     _socket.on('message', (data) {
       Map<String, dynamic> json = data['data'];
       SocketData socketData = SocketData.fromJson(json);
-      _socketResponse.sink.add(socketData);
-    });
-  }
 
-  static void sendOrder(SocketData socketData) {
-    _socket.emit('message', {'data': socketData.toJson(), 'code': _code});
+      _socketResponse.sink.add(socketData);
+      print("recive ${socketData}");
+    });
   }
 
   static void dispose() {
