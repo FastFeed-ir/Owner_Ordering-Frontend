@@ -77,7 +77,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       padding: EdgeInsets.only(
         left: 20,
         right: 20,
-        top: 30,
+        top: 50,
       ),
       children: [
         Column(
