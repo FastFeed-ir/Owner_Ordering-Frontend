@@ -54,7 +54,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(
                           color: Colors.black,
-                          fontFamily: "IranSansWeb",
+                          fontFamily: IranSansWeb,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black),
@@ -133,7 +133,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.black,
-                          fontFamily: "IranSansWeb",
+                          fontFamily: IranSansWeb,
                         ),
                       ),
                     ),

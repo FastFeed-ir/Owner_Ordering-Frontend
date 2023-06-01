@@ -70,7 +70,7 @@ Widget buildInfoDialog(BuildContext context, String? text, String? Phrase) {
             'متوجه شدم',
             style: TextStyle(
               color: BlackColor,
-              fontFamily: "IranSansWeb",
+              fontFamily: IranSansWeb,
               fontSize: 24.sp,
             ),
           ),

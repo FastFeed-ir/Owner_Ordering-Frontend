@@ -168,7 +168,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.white,
-                        fontFamily: "IranSansWeb",
+                        fontFamily: IranSansWeb,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -192,7 +192,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
-                    fontFamily: "IranSansWeb",
+                    fontFamily: IranSansWeb,
                   ),
                 ),
                 onPressed: () async {
@@ -212,7 +212,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
-                    fontFamily: "IranSansWeb",
+                    fontFamily: IranSansWeb,
                   ),
                 ),
                 onPressed: () async {
