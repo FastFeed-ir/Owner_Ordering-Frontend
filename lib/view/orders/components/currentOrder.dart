@@ -46,7 +46,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "میز: " + widget.socketData.order.tableNumber.toString(),
+            "میز: ${widget.socketData?.order?.tableNumber}",
             textAlign: TextAlign.left,
             style: const TextStyle(
                 fontFamily: "iransans",
@@ -69,32 +69,24 @@ class _CurrentOrderState extends State<CurrentOrder> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(widget
-                                  .socketData.orderItem[index].productTitle!),
-                              Text(widget.socketData.orderItem[index]
-                                      .productUnitPrice
-                                      .toString() +
-                                  " تومان"),
+                              Text("${widget.socketData?.orderItem?[index]?.productTitle }"),
+                              Text("${widget.socketData?.orderItem?[index]?.productUnitPrice } تومان"),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "X" +
-                                    widget.socketData.orderItem[index].quantity
-                                        .toString(),
+                                "X${widget.socketData.orderItem[index].quantity}",
                                 style: const TextStyle(
                                   backgroundColor: YellowColor,
                                   fontFamily: "iransans",
                                 ),
                               ),
-                              Text((widget.socketData.orderItem[index]
+                              Text("${widget.socketData.orderItem[index]
                                               .productUnitPrice! *
                                           widget.socketData.orderItem[index]
-                                              .quantity)
-                                      .toString() +
-                                  " تومان"),
+                                              .quantity} تومان"),
                             ],
                           ),
                           const Divider(
@@ -106,11 +98,11 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     }),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                  child: Column(
+                  child:  Column(
                     children: [
-                      Row(
+                      const Row(
                         children: [
-                          const Text("توضیحات:"),
+                          Text("توضیحات:"),
                         ],
                       ),
                       Row(
