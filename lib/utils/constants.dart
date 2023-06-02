@@ -69,12 +69,6 @@ String RestaurantLogoDef = "assets/restarauntLogo.png";
 String WhiteLogo = "assets/logo_white.png";
 String BlackLogo = "assets/logo_black.png";
 String SadFace = "assets/images/sadface.png";
-String FastfeedLogo = "assets/images/logo.png";
-String Tick = "assets/images/Tick.png";
-String Zabdar = "assets/images/zabdar.png";
-String RestaurantLogoDef = "assets/images/restarauntLogo.png";
-String WhiteLogo = "assets/images/logo_white.png";
-String SadFace = "assets/images/sadface.png";
 // Fonts
 String IranSansWeb = "IranSansWeb";
 String FugazOne = "FugazOne";
@@ -155,9 +149,9 @@ Widget loading(){
 }
 AppBar AppBarMenu(){
   return AppBar(
-    title: Center(child: Image.asset(WhiteLogo, width: 50, height: 50,)),
+    title: Center(child: Image.asset(BlackLogo, width: 50, height: 50,)),
     //actions: [],
-    leading: BackButton(color: WhiteColor,),
+    leading: BackButton(color: BlackColor,),
     backgroundColor: YellowColor,
   );
 }
