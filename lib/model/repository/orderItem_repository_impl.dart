@@ -21,7 +21,7 @@ class OrderItemRepositoryImpl extends OrderItemRepository {
   @override
   Future<void> deleteOrderItem(OrderItem orderItem) async {
     var response = await dio.delete(
-      'stores/${orderItem.id}/',
+      'order_items/${orderItem.id}/',
     );
     print('response: ${response.statusMessage}');
   }

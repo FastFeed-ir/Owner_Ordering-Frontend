@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:owner_ordering_frontend/view_model/orderItem_viewmodel.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 import '../../../model/entity/orderItem.dart';
 import '../../../model/entity/socketData.dart';
@@ -70,23 +71,47 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("${widget.socketData?.orderItem?[index]?.productTitle }"),
-                              Text("${widget.socketData?.orderItem?[index]?.productUnitPrice } تومان"),
+                              Row(
+                                children: [
+                                  Text("${widget.socketData?.orderItem?[index]?.productUnitPrice}".toPersianDigit().seRagham()),
+                                  Text(" تومان"),
+                                ],
+                              ),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "X${widget.socketData.orderItem[index].quantity}",
-                                style: const TextStyle(
-                                  backgroundColor: YellowColor,
-                                  fontFamily: "iransans",
-                                ),
+                              Row(
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      "${widget.socketData.orderItem[index].quantity}".toPersianDigit().seRagham()+"x",
+                                      style: const TextStyle(
+                                        fontFamily: "iransans",
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(color: YellowColor,borderRadius: BorderRadius.all(Radius.circular(8))),
+                                    padding: EdgeInsets.all(8),
+                                  ),
+                                  // Text(
+                                  //   "X",
+                                  //   style: const TextStyle(
+                                  //     backgroundColor: YellowColor,
+                                  //     fontFamily: "iransans",
+                                  //   ),
+                                  // ),
+                                ],
                               ),
-                              Text("${widget.socketData.orderItem[index]
-                                              .productUnitPrice! *
-                                          widget.socketData.orderItem[index]
-                                              .quantity} تومان"),
+                              Row(
+                                children: [
+                                  Text("${(widget.socketData.orderItem[index]
+                                      .productUnitPrice! *
+                                      widget.socketData.orderItem[index]
+                                          .quantity).round()}".toPersianDigit().seRagham()),
+                                  Text(" تومان"),
+                                ],
+                              ),
                             ],
                           ),
                           const Divider(
@@ -127,7 +152,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                 const Text("مبلغ قابل پرداخت: ",
                     style: TextStyle(
                         fontFamily: "iransans", fontWeight: FontWeight.bold)),
-                Text(totalCount(widget.socketData.orderItem).toString(),
+                Text(totalCount(widget.socketData.orderItem).toString().toPersianDigit().seRagham(),
                     style: const TextStyle(
                         fontFamily: "iransans", fontWeight: FontWeight.bold)),
               ],
@@ -155,7 +180,46 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     ),
                   ),
                   onPressed: () async {
-                    widget.onClose(widget.socketData);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('آیا از بستن سفارش مطمئن هستید؟'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('بله',style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontFamily: "IranSansWeb",
+                              ),),
+                              onPressed: () {
+                                // Perform delete action here
+                                widget.onClose(widget.socketData);
+                                Navigator.of(context).pop();
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor: YellowColor,
+                                fixedSize: const Size.fromWidth(100),
+                              ),
+                            ),
+                            TextButton(
+                              child: Text('خیر',style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontFamily: "IranSansWeb",
+                              ),),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor: YellowColor,
+                                fixedSize: const Size.fromWidth(100),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                 ),
                 TextButton(
@@ -172,14 +236,51 @@ class _CurrentOrderState extends State<CurrentOrder> {
                       ),
                     ),
                     onPressed: () async {
-                      //TODO cancel order
                       print(widget.socketData.order.id);
                       print(widget.socketData.orderItem[0].id);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('آیا از لغو سفارش مطمئن هستید؟'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('بله',style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  fontFamily: "IranSansWeb",
+                                ),),
+                                onPressed: () {
 
-                      _orderViewModel.deleteOrder(widget.socketData.order);
-                      for (var i in widget.socketData.orderItem) {
-                        _orderItemViewModel.deleteOrderItem(i);
-                      }
+                                  _orderViewModel.deleteOrder(widget.socketData.order);
+                                  // for (var i in widget.socketData.orderItem) {
+                                  //   _orderItemViewModel.deleteOrderItem(i);
+                                  // }
+                                  Navigator.of(context).pop();
+                                },
+                                style: TextButton.styleFrom(
+                                  backgroundColor: YellowColor,
+                                  fixedSize: const Size.fromWidth(100),
+                                ),
+                              ),
+                              TextButton(
+                                child: Text('خیر',style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  fontFamily: "IranSansWeb",
+                                ),),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                style: TextButton.styleFrom(
+                                  backgroundColor: YellowColor,
+                                  fixedSize: const Size.fromWidth(100),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     }),
               ],
             ),

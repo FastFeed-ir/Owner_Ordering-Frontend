@@ -25,7 +25,7 @@ Map<String, dynamic> orderJson = {
   'store': 1,
   'table_number': 4,
   'description': 'Dummy order',
-  'created_at_time': '2023-05-25 10:00:00',
+  'created_at': '2023-05-25 10:00:00',
   'auth_code': 987,
 };
 
@@ -33,20 +33,22 @@ Order order = Order.fromJson(orderJson);
 
 List<Map<String, dynamic>> orderItemsJson = [
   {
-    'id': 1,
-    'product': 456,
-    'product_title': 'Product 1',
-    'product_unit_price': 9.99,
-    'quantity': 2,
-    'order': 1,
+    "id": 15,
+    "product_title": "تست",
+    "product_unit_price": 25000.000,
+    "quantity": 2,
+    "created_at": "1402/03/07 11:30:56",
+    "product": 19,
+    "order": 3
   },
   {
-    'id': 2,
-    'product': 789,
-    'product_title': 'Product 2',
-    'product_unit_price': 14.99,
-    'quantity': 1,
-    'order': 1,
+    "id": 16,
+    "product_title": "تست",
+    "product_unit_price": 55000.000,
+    "quantity": 2,
+    "created_at": "1402/03/07 11:30:56",
+    "product": 19,
+    "order": 3
   },
 ];
 

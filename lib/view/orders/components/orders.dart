@@ -119,80 +119,80 @@ class _OrderBody extends StatefulWidget {
 
 class _OrderBodyState extends State<_OrderBody> {
   @override
+  void closeOrder(SocketData socketData) {
+    setState(() {
+      currentOrders.remove(socketData);
+      passedOrders.add(socketData);
+    });
+  }
+  ScrollController _scrollController = ScrollController();
+
+  void _scrollDown() {
+    try {
+      Future.delayed(
+        const Duration(milliseconds: 300),
+            () => _scrollController
+            .jumpTo(_scrollController.position.maxScrollExtent),
+      );
+    } on Exception catch (_) {}
+  }
+
+  @override
   Widget build(BuildContext context) {
-    ScrollController _scrollController = ScrollController();
-    void closeOrder(SocketData socketData) {
-      setState(() {
-        currentOrders.remove(socketData);
-        passedOrders.add(socketData);
-      });
-    }
-
-    void _scrollDown() {
-      try {
-        Future.delayed(
-          const Duration(milliseconds: 300),
-          () => _scrollController
-              .jumpTo(_scrollController.position.maxScrollExtent),
-        );
-      } on Exception catch (_) {}
-    }
-
     return Expanded(
-      child: StreamBuilder(
-        stream: widget.socketDataStream,
-        builder: (BuildContext context, AsyncSnapshot<SocketData> snapshot) {
-          if (snapshot.connectionState == ConnectionState.none) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasData && snapshot.data != null) {
-            currentOrders.add(snapshot.data!);
-          }
-          // _scrollDown();
-          return Column(
-            children: [
-              const Text(
-                "جاری",
-                style: TextStyle(
-                    fontFamily: "iransans",
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Text(
+              "جاری",
+              style: TextStyle(
+                fontFamily: "iransans",
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                height: context.height * 0.72,
-                child: Expanded(
-                  child: ListView.builder(
-                    // controller: _scrollController,
-                    itemCount: currentOrders.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        CurrentOrder(
-                      socketData: currentOrders[index],
-                      onClose: closeOrder,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "گذشته",
-                style: TextStyle(
-                    fontFamily: "iransans",
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  // controller: _scrollController,
-                  itemCount: passedOrders.length,
+            ),
+            StreamBuilder(
+              stream: widget.socketDataStream,
+              builder:
+                  (BuildContext context, AsyncSnapshot<SocketData> snapshot) {
+                if (snapshot.connectionState == ConnectionState.none) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (snapshot.hasData && snapshot.data != null) {
+                  currentOrders.add(snapshot.data!);
+                }
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: currentOrders.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      PassedOrder(socketData: passedOrders[index]),
-                ),
+                      CurrentOrder(
+                        socketData: currentOrders[index],
+                        onClose: closeOrder,
+                      ),
+                );
+              },
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "گذشته",
+              style: TextStyle(
+                fontFamily: "iransans",
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          );
-        },
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              itemCount: passedOrders.length,
+              itemBuilder: (BuildContext context, int index) =>
+                  PassedOrder(socketData: passedOrders[index]),
+            ),
+          ],
+        ),
       ),
     );
   }
