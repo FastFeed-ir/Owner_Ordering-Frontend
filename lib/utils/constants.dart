@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../model/entity/order.dart';
+import '../model/entity/orderItem.dart';
+import '../model/entity/socketData.dart';
 // Colors
 const Color WhiteColor = Color(0xFFFFFFFF);
 const Color BaseColor = Color(0xfff5f5f5);
@@ -11,11 +15,46 @@ const Color GreenColor = Color(0xff2CBA15);
 
 // Pages
 String LandingPage = "/landingPage";
-String Order = "/orders";
+String OrderPage = "/orders";
 String Loginsignup = "/login&signup";
 String RestaurantListPage = "/restaurantListPage";
 String OrderingPage = "/orderingPage";
 //String Page = "/Page";
+Map<String, dynamic> orderJson = {
+  'id': 1,
+  'store': 1,
+  'table_number': 4,
+  'description': 'Dummy order',
+  'created_at_time': '2023-05-25 10:00:00',
+  'auth_code': 987,
+};
+
+Order order = Order.fromJson(orderJson);
+
+List<Map<String, dynamic>> orderItemsJson = [
+  {
+    'id': 1,
+    'product': 456,
+    'product_title': 'Product 1',
+    'product_unit_price': 9.99,
+    'quantity': 2,
+    'order': 1,
+  },
+  {
+    'id': 2,
+    'product': 789,
+    'product_title': 'Product 2',
+    'product_unit_price': 14.99,
+    'quantity': 1,
+    'order': 1,
+  },
+];
+
+List<OrderItem> orderItems = orderItemsJson
+    .map((json) => OrderItem.fromJson(json))
+    .toList();
+
+SocketData socketData1 =SocketData(order: order, orderItem: orderItems);
 
 //Strings, Names, Address
 late String Phone ;
@@ -23,6 +62,13 @@ late String Email ;
 late String Address ;
 late String InstagramPage ;
 // Images
+String FastfeedLogo = "assets/logo.png";
+String Tick = "assets/Tick.png";
+String Zabdar = "assets/zabdar.png";
+String RestaurantLogoDef = "assets/restarauntLogo.png";
+String WhiteLogo = "assets/logo_white.png";
+String BlackLogo = "assets/logo_black.png";
+String SadFace = "assets/images/sadface.png";
 String FastfeedLogo = "assets/images/logo.png";
 String Tick = "assets/images/Tick.png";
 String Zabdar = "assets/images/zabdar.png";

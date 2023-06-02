@@ -10,6 +10,7 @@ import 'package:owner_ordering_frontend/view/customerLogin/components/login&sign
 import 'package:owner_ordering_frontend/view/orders/components/orders.dart';
 
 import 'firebase_options.dart';
+import 'model/repository/socket_service.dart';
 import 'view/subscriptions/components/restaurantList.dart';
 
 Future<void> main() async {
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SocketService.setCode("4");
+    SocketService.connectAndListen();
     return ScreenUtilInit(
       designSize: const Size(1920.0, 1080.0),
       minTextAdapt: true,
@@ -32,12 +35,12 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           getPages: [
-            GetPage(name: Order, page: () => Orders()),
+            GetPage(name: OrderPage, page: () => Orders()),
             GetPage(name: Loginsignup, page: () => PhoneNumberScreen()),
             GetPage(name: RestaurantListPage, page: () => RestaurantListScreen()),
           ],
           // title: 'FastFeed',
-          initialRoute: Loginsignup,
+          initialRoute: OrderPage,
           textDirection: TextDirection.rtl,
           defaultTransition: Transition.noTransition,
           theme: ThemeData(

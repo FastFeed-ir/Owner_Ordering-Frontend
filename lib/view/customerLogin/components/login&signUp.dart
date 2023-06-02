@@ -23,6 +23,44 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(360, 800));
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(ScreenUtil().setHeight(180)),
+          child: AppBar(
+            backgroundColor: YellowColor,
+            automaticallyImplyLeading: false,
+            flexibleSpace: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                final double availableWidth = constraints.maxWidth;
+                final double availableHeight = constraints.maxHeight;
+
+                final double logoHeight = availableHeight * 0.5;
+                final double titleFontSize = availableHeight * 0.12;
+                final double backIconSize = availableHeight * 0.10;
+
+                return Stack(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              BlackLogo,
+                              height: logoHeight,
+                              fit: BoxFit.cover,
+                            ),
+                            SizedBox(height: availableHeight * 0.05),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
+            ),
+            elevation: 0.0,
+          )),
       body: Padding(
         padding: EdgeInsets.all(24),
         child: Form(
