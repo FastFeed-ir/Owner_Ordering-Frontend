@@ -70,10 +70,31 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     });
   }
 
-  void _resendCode() {
+  Future<void> _resendCode() async {
     // code to resend the confirmation code to the user's phone number
-    _resendSeconds = 100;
+    _resendSeconds = 60;
     _startResendTimer();
+    //
+    FirebaseAuth auth = FirebaseAuth.instance;
+    try {
+      await auth.verifyPhoneNumber(
+        phoneNumber: '${widget.phoneNumber}',
+        verificationCompleted: (PhoneAuthCredential credential) async {},
+        verificationFailed: (e) {
+          throw Exception(e.toString());
+        },
+        codeSent: ((String verificationId, int? resendToken) async {
+          await Future.delayed(Duration(seconds: 2));
+          Get.to(() => ConfirmationScreen(
+            phoneNumber: '${widget.phoneNumber}',
+            verificationId: verificationId,
+          ));
+        }),
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e.toString());
+    }
   }
 
   void _confirmCode() {
@@ -97,7 +118,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
         loading();
       }
       //TODO got to subscription
-      // Get.toNamed(HomePage, arguments: id);----------------------------------------------
+      Get.toNamed(RestaurantListPage, arguments: id);
     });
   }
 
@@ -110,7 +131,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              ' لطفا کد ارسال شده به شماره ${widget.phoneNumber} را وارد نمایید ',
+              ' لطفا کد ارسال شده به شماره ${(widget.phoneNumber)?.substring(1)} را وارد نمایید ',
               style: TextStyle(
                 fontFamily: 'IranSansWeb',
                   fontSize: 20,
