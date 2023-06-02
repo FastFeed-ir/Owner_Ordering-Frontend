@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             GetPage(name: RestaurantListPage, page: () => RestaurantListScreen()),
           ],
           // title: 'FastFeed',
-          initialRoute: OrderPage,
+          initialRoute: Loginsignup,
           textDirection: TextDirection.rtl,
           defaultTransition: Transition.noTransition,
           theme: ThemeData(

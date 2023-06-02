@@ -147,7 +147,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   Widget buildListItem(Subscription subscriptionModel, Store store, int index) {
     return Container(
       // ToDo get name from API
-      padding: EdgeInsets.only(right: 20, left: 10, bottom: 30),
+      padding: EdgeInsets.only(right: 10, left: 10, bottom: 30),
       decoration: BoxDecoration(
         border: Border.all(
           color: BlackColor,
