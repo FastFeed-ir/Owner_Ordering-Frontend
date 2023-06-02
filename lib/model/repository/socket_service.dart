@@ -24,7 +24,10 @@ class SocketService {
       Map<String, dynamic> json = data['data'];
       SocketData socketData = SocketData.fromJson(json);
 
-      _socketResponse.sink.add(socketData);
+      if(socketData.orderItem.length>0) {
+        _socketResponse.sink.add(socketData);
+
+      }
       print("recive ${socketData}");
     });
   }

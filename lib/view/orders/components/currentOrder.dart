@@ -100,7 +100,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child:  Column(
                     children: [
-                      const Row(
+                      Row(
                         children: [
                           Text("توضیحات:"),
                         ],
@@ -173,6 +173,9 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     ),
                     onPressed: () async {
                       //TODO cancel order
+                      print(widget.socketData.order.id);
+                      print(widget.socketData.orderItem[0].id);
+
                       _orderViewModel.deleteOrder(widget.socketData.order);
                       for (var i in widget.socketData.orderItem) {
                         _orderItemViewModel.deleteOrderItem(i);
