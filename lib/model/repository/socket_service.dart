@@ -24,13 +24,12 @@ class SocketService {
     _socket.on('message', (data) {
       Map<String, dynamic> json = data['data'];
       SocketData socketData = SocketData.fromJson(json);
-
-      Set<Order> orders=Set();
-      // if(orders.add(socketData.order)){
+      Set<Order> orders={};
+      if(orders.add(socketData.order)){
         if(socketData.orderItem.length>0) {
           _socketResponse.sink.add(socketData);
         }
-      // }
+      }
 
 
       print("recive ${socketData}");

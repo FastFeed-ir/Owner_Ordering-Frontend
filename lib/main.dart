@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SocketService.connectAndListen();
     return ScreenUtilInit(
       designSize: const Size(1920.0, 1080.0),
       minTextAdapt: true,

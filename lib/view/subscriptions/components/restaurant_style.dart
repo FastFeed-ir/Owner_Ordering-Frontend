@@ -62,7 +62,7 @@ Widget restaurantTitle(String? name, String? cratedAt, int? period, int? busines
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Text(
@@ -74,7 +74,7 @@ Widget restaurantTitle(String? name, String? cratedAt, int? period, int? busines
               color: BlackColor,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -88,7 +88,7 @@ Widget restaurantTitle(String? name, String? cratedAt, int? period, int? busines
                   color: BlackColor,
                 ),
               ),
-              SizedBox(width: 6,),
+              const SizedBox(width: 6,),
               Text(
                 "${startYear.toString().toPersianDigit()}/${startMonth.toString().toPersianDigit()}/${startDay.toString().toPersianDigit()}",
                 style: TextStyle(
@@ -100,7 +100,7 @@ Widget restaurantTitle(String? name, String? cratedAt, int? period, int? busines
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -111,7 +111,7 @@ Widget restaurantTitle(String? name, String? cratedAt, int? period, int? busines
                 fontFamily: IranSansWeb,
                 color: BlackColor,
               ),),
-              SizedBox(width: 5,),
+              const SizedBox(width: 5,),
               Text(
                 "${finishYear.toString().toPersianDigit()}/${finishMonth.toString().toPersianDigit()}/${finishDay.toString().toPersianDigit()}",
                 style: TextStyle(
@@ -128,17 +128,19 @@ Widget restaurantTitle(String? name, String? cratedAt, int? period, int? busines
       Column(
         children: [
           Container(
-            padding: EdgeInsets.only(left: 10,right: 10),
+            padding: const EdgeInsets.only(left: 10,right: 10),
             child: ElevatedButton(
               onPressed: () {
-                SocketService.setCode(storeId.toString());
+                SocketService.setCode("$storeId");
+                SocketService.connectAndListen();
+
                 Get.toNamed(OrderPage, arguments: [businessOwner, storeId]);
               },
+              style:
+              buttonStyle_build(90, 40, 10, YellowColor),
               child: SubButtonTextStyle(
                 text: 'انتخاب',
               ),
-              style:
-              buttonStyle_build(90, 40, 10, YellowColor),
             ),
           ),
         ],
