@@ -1,39 +1,36 @@
-class SubscriptionModel {
+class Subscription {
   int? id;
   int? business_owner;
   int? store;
   int? period;
   double? amount;
   String? url;
-  String? startDate;
-  SubscriptionModel({
+  String? created_at;
+  Subscription({
     this.id,
     required this.business_owner,
     required this.store,
     required this.period,
     required this.amount,
     this.url,
-    this.startDate,
+    this.created_at,
   });
 
-  factory SubscriptionModel.fromJson(Map<String, dynamic> json) {
-    return SubscriptionModel(
+  factory Subscription.fromJson(Map<String, dynamic> json) {
+    return Subscription(
       id: json['id'],
       business_owner: json['business_owner'],
       store: json['store'],
       period: json['period'],
       amount: double.parse(json['amount']),
       url: json['url'],
-      startDate: json['start_date'],
+      created_at: json['created_at'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'business_owner' : business_owner,
-    'store': store,
-    'period': period,
-    'amount':amount,
-    'url': url,
-    'start_date':startDate,
-  };
+        'store': store,
+        'period': period,
+        'amount': amount,
+      };
 }

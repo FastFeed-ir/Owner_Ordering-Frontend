@@ -142,7 +142,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),),
                       ),
                       onPressed: () async {
-                        print('+98${_phoneController}');
                         if (_formKey.currentState?.validate() == true) {
                           FirebaseAuth auth = FirebaseAuth.instance;
                           try {

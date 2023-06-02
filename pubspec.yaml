@@ -19,7 +19,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: '>=2.19.2 <3.0.0'
+
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -78,11 +79,15 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
   assets:
-      - assets/logo_black.png
+    - assets/images/logo.png
+    - assets/images/Tick.png
+    - assets/images/zabdar.png
+    - assets/images/restarauntLogo.png
+    - assets/images/logo_white.png
+    - assets/images/sadface.png
+    - assets/logo_black.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
@@ -105,6 +110,16 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
   #
+  fonts:
+    - family: IranSansWeb
+      fonts:
+        - asset: fonts/IRANSansWeb(FaNum).ttf
+
+    - family: FugazOne
+      fonts:
+        - asset: fonts/FugazOne-Regular.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

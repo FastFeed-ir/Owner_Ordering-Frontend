@@ -11,6 +11,7 @@ import 'package:owner_ordering_frontend/view/orders/components/orders.dart';
 
 import 'firebase_options.dart';
 import 'model/repository/socket_service.dart';
+import 'view/subscriptions/components/restaurantList.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           getPages: [
             GetPage(name: OrderPage, page: () => Orders()),
             GetPage(name: Loginsignup, page: () => PhoneNumberScreen()),
+            GetPage(name: RestaurantListPage, page: () => RestaurantListScreen()),
           ],
           // title: 'FastFeed',
           initialRoute: OrderPage,

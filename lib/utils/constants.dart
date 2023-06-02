@@ -17,6 +17,8 @@ const Color GreenColor = Color(0xff2CBA15);
 String LandingPage = "/landingPage";
 String OrderPage = "/orders";
 String Loginsignup = "/login&signup";
+String RestaurantListPage = "/restaurantListPage";
+String OrderingPage = "/orderingPage";
 //String Page = "/Page";
 Map<String, dynamic> orderJson = {
   'id': 1,
@@ -66,11 +68,18 @@ String Zabdar = "assets/zabdar.png";
 String RestaurantLogoDef = "assets/restarauntLogo.png";
 String WhiteLogo = "assets/logo_white.png";
 String BlackLogo = "assets/logo_black.png";
+String SadFace = "assets/images/sadface.png";
+String FastfeedLogo = "assets/images/logo.png";
+String Tick = "assets/images/Tick.png";
+String Zabdar = "assets/images/zabdar.png";
+String RestaurantLogoDef = "assets/images/restarauntLogo.png";
+String WhiteLogo = "assets/images/logo_white.png";
+String SadFace = "assets/images/sadface.png";
 // Fonts
 String IranSansWeb = "IranSansWeb";
 String FugazOne = "FugazOne";
 
-ButtonStyle buttonStyle_build(int width, int height, int radius,Color color){
+ButtonStyle buttonStyle_build(double width, double height, double radius,Color color){
   return ButtonStyle(
     backgroundColor:
     MaterialStateProperty.all<Color>(color),
@@ -78,11 +87,11 @@ ButtonStyle buttonStyle_build(int width, int height, int radius,Color color){
     padding:
     MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
     fixedSize: MaterialStateProperty.all<Size>(
-      Size(width.w, height.h),
+      Size(width, height),
     ),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radius.r),
+        borderRadius: BorderRadius.circular(radius),
       ),
     ),
   );
@@ -146,9 +155,9 @@ Widget loading(){
 }
 AppBar AppBarMenu(){
   return AppBar(
-    title: Image.asset(WhiteLogo, width: 90.w, height: 90.h,),
+    title: Center(child: Image.asset(WhiteLogo, width: 50, height: 50,)),
     //actions: [],
     leading: BackButton(color: WhiteColor,),
-    backgroundColor: RedColor,
+    backgroundColor: YellowColor,
   );
 }

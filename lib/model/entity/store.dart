@@ -1,7 +1,3 @@
-import 'dart:html';
-
-import 'package:image_picker/image_picker.dart';
-
 class Store{
   int? id;
   int? business_owner;
@@ -20,15 +16,15 @@ class Store{
     this.id,
     required this.business_owner,
     required this.title,
-    required this.logo,
+    this.logo,
     required this.business_type,
     required this.state,
-    required this.city,
-    required this.address,
+    this.city,
+    this.address,
     required this.owner_phone_number,
     required this.telephone_number,
     required this.tables_count,
-    required this.instagram_page_link,
+    this.instagram_page_link,
 });
   factory Store.fromJson(Map<String, dynamic> json) {
     return Store(
