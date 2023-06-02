@@ -1,6 +1,5 @@
-import 'package:owner_ordering_frontend/model/entity/product.dart';
-
 import '../entity/collection.dart';
+import '../entity/product.dart';
 import '../util/constants.dart';
 import 'collection_repository.dart';
 
@@ -16,8 +15,7 @@ class CollectionRepositoryImpl extends CollectionRepository {
       for (var data in dataList) {
         if (data is Map<String, dynamic>) {
           var collectionServer = Collection.fromJson(data);
-          //TODO fix storeId
-            collections.add(collectionServer);
+          collections.add(collectionServer);
         }
       }
       return collections;
@@ -36,8 +34,7 @@ class CollectionRepositoryImpl extends CollectionRepository {
       for (var data in dataList) {
         if (data is Map<String, dynamic>) {
           var productServer = Product.fromJson(data);
-          //TODO fix storeId
-            products.add(productServer);
+          products.add(productServer);
         }
       }
       return products;

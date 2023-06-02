@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
+import '../entity/order.dart';
 import '../entity/socketData.dart';
 import '../util/constants.dart';
 
@@ -24,10 +25,14 @@ class SocketService {
       Map<String, dynamic> json = data['data'];
       SocketData socketData = SocketData.fromJson(json);
 
-      if(socketData.orderItem.length>0) {
-        _socketResponse.sink.add(socketData);
-
+      Set<Order> orders=Set();
+      if(orders.add(socketData.order)){
+        if(socketData.orderItem.length>0) {
+          _socketResponse.sink.add(socketData);
+        }
       }
+
+
       print("recive ${socketData}");
     });
   }

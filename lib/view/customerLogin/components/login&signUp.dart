@@ -27,7 +27,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   Future<void> prefData() async {
     prefs = await SharedPreferences.getInstance();
     bool loggedIn = prefs.getBool('loggedIn') ?? false;
-    print(prefs.getInt('id'));
     if (loggedIn) {
       Get.toNamed(RestaurantListPage, arguments: prefs.getInt('id'));
     }

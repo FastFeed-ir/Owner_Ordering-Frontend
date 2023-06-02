@@ -19,6 +19,7 @@ String OrderPage = "/orders";
 String Loginsignup = "/login&signup";
 String RestaurantListPage = "/restaurantListPage";
 String OrderingPage = "/orderingPage";
+String CategoriesPage = "/categoriesPage";
 //String Page = "/Page";
 Map<String, dynamic> orderJson = {
   'id': 1,
@@ -71,6 +72,8 @@ String RestaurantLogoDef = "assets/restarauntLogo.png";
 String WhiteLogo = "assets/logo_white.png";
 String BlackLogo = "assets/logo_black.png";
 String SadFace = "assets/images/sadface.png";
+String OwnerPageimg = "assets/ownerBackground.png";
+
 // Fonts
 String IranSansWeb = "IranSansWeb";
 String FugazOne = "FugazOne";

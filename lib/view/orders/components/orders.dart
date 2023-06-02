@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:owner_ordering_frontend/model/entity/socketData.dart';
 import 'package:owner_ordering_frontend/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/repository/socket_service.dart';
 import './currentOrder.dart';
 import './passedOrder.dart';
 
 class Orders extends StatefulWidget {
-  const Orders({Key? key}) : super(key: key);
-
+  Orders({Key? key}) : super(key: key);
+  var parameter = Get.arguments;
   @override
   State<Orders> createState() => _OrdersState();
 }
@@ -21,10 +24,15 @@ var passedOrders = <SocketData>[];
 class _OrdersState extends State<Orders> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
-
+  late int storeId;
+  late int ownerId;
   @override
   void initState() {
     super.initState();
+    ownerId = widget.parameter[0];
+    storeId = widget.parameter[1];
+
+
   }
 
   @override
@@ -64,7 +72,8 @@ class _OrdersState extends State<Orders> {
                   ),
                   TextButton(
                     onPressed: () {
-                      //TODO go to change menu
+                      Navigator.pop(context);
+                      Get.toNamed(CategoriesPage, arguments: storeId);
                     },
                     child: const Text(
                       'تغییر منو',
@@ -76,8 +85,11 @@ class _OrdersState extends State<Orders> {
                     color: BlackColor,
                   ),
                   TextButton(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.setBool("loggedIn", false);
+                      prefs.setInt("id", 0);
+                      Get.toNamed(Loginsignup);
                     },
                     child: const Text(
                       'خروج',

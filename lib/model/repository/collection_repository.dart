@@ -1,6 +1,7 @@
-import 'package:owner_ordering_frontend/model/entity/product.dart';
+
 
 import '../entity/collection.dart';
+import '../entity/product.dart';
 
 abstract class CollectionRepository {
   Future<List<Collection>> getCollections(int storeId);

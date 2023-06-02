@@ -1,10 +1,9 @@
 import 'dart:async';
-
-import 'package:owner_ordering_frontend/model/entity/product.dart';
-import 'package:owner_ordering_frontend/model/repository/collection_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../model/entity/collection.dart';
+import '../model/entity/product.dart';
+import '../model/repository/collection_repository_impl.dart';
 
 class CollectionViewModel extends ChangeNotifier {
   var repository = CollectionRepositoryImpl();
@@ -18,8 +17,8 @@ class CollectionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getProducts(int storId) async {
-    products.add(await repository.getProducts(storId));
+  void getProducts(int storeId) async {
+    products.add(await repository.getProducts(storeId));
     notifyListeners();
   }
 

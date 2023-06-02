@@ -127,7 +127,7 @@ Widget restaurantTitle(String? name, String? cratedAt, int? period, int? busines
       Column(
         children: [
           Container(
-            padding: EdgeInsets.only(left: 10,right: 20),
+            padding: EdgeInsets.only(left: 10,right: 10),
             child: ElevatedButton(
               onPressed: () {
                 Get.toNamed(OrderPage, arguments: [businessOwner, storeId]);

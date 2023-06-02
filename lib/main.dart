@@ -6,6 +6,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:material_color_gen/material_color_gen.dart';
 import 'package:owner_ordering_frontend/utils/constants.dart';
+import 'package:owner_ordering_frontend/view/categories/categories_screen.dart';
 import 'package:owner_ordering_frontend/view/customerLogin/components/login&signUp.dart';
 import 'package:owner_ordering_frontend/view/orders/components/orders.dart';
 
@@ -38,6 +39,8 @@ class MyApp extends StatelessWidget {
             GetPage(name: OrderPage, page: () => Orders()),
             GetPage(name: Loginsignup, page: () => PhoneNumberScreen()),
             GetPage(name: RestaurantListPage, page: () => RestaurantListScreen()),
+            GetPage(name: CategoriesPage, page: () => CategoriesScreen(),
+            ),
           ],
           // title: 'FastFeed',
           initialRoute: Loginsignup,

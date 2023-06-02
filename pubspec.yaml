@@ -88,6 +88,7 @@ flutter:
     - assets/logo_white.png
     - assets/images/sadface.png
     - assets/logo_black.png
+    - assets/ownerBackground.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
