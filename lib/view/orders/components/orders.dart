@@ -32,7 +32,6 @@ class _OrdersState extends State<Orders> {
     ownerId = widget.parameter[0];
     storeId = widget.parameter[1];
 
-
   }
 
   @override
@@ -130,6 +129,7 @@ class _OrderBody extends StatefulWidget {
 }
 
 class _OrderBodyState extends State<_OrderBody> {
+  final _scrollController = ScrollController();
   @override
   void closeOrder(SocketData socketData) {
     setState(() {
@@ -137,17 +137,7 @@ class _OrderBodyState extends State<_OrderBody> {
       passedOrders.add(socketData);
     });
   }
-  ScrollController _scrollController = ScrollController();
 
-  void _scrollDown() {
-    try {
-      Future.delayed(
-        const Duration(milliseconds: 300),
-            () => _scrollController
-            .jumpTo(_scrollController.position.maxScrollExtent),
-      );
-    } on Exception catch (_) {}
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,21 +153,27 @@ class _OrderBodyState extends State<_OrderBody> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            StreamBuilder(
+            StreamBuilder<SocketData>(
               stream: widget.socketDataStream,
-              builder:
-                  (BuildContext context, AsyncSnapshot<SocketData> snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<SocketData> snapshot) {
                 if (snapshot.connectionState == ConnectionState.none) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
                 if (snapshot.hasData && snapshot.data != null) {
-                  currentOrders.add(snapshot.data!);
+                  currentOrders.insert(0, snapshot.data!);
+                  _scrollController.animateTo(
+                    0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,
+                  );
                 }
+
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
+                  controller: _scrollController,
                   itemCount: currentOrders.length,
                   itemBuilder: (BuildContext context, int index) =>
                       CurrentOrder(
