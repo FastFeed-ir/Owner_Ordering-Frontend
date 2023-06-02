@@ -51,11 +51,11 @@ class _OrdersState extends State<Orders> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      print('Button pressed ...');
+                      Navigator.pop(context);
                     },
                     child: const Text(
                       'سفارش ها',
-                      style: TextStyle(color: BlackColor),
+                      style: TextStyle(color: BlackColor,),
                     ),
                   ),
                   const Divider(
@@ -64,7 +64,7 @@ class _OrdersState extends State<Orders> {
                   ),
                   TextButton(
                     onPressed: () {
-                      print('Button pressed ...');
+                      //TODO go to change menu
                     },
                     child: const Text(
                       'تغییر منو',

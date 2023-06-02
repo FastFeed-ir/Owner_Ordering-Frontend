@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -116,9 +116,13 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
         await Future.delayed(const Duration(seconds: 5));
         owner = await _viewModel.addOwner(owner);
         id = owner.id;
+
         loading();
       }
-      //TODO got to subscription
+      //store logging
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool('loggedIn', true);
+      prefs.setInt('id',id!);
       Get.toNamed(RestaurantListPage, arguments: id);
     });
   }
