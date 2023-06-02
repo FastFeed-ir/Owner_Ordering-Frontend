@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
+import '../../../model/repository/socket_service.dart';
 import '../../../utils/constants.dart';
 
 class HomeTextStyle extends StatelessWidget {
@@ -130,6 +131,7 @@ Widget restaurantTitle(String? name, String? cratedAt, int? period, int? busines
             padding: EdgeInsets.only(left: 10,right: 10),
             child: ElevatedButton(
               onPressed: () {
+                SocketService.setCode(storeId.toString());
                 Get.toNamed(OrderPage, arguments: [businessOwner, storeId]);
               },
               child: SubButtonTextStyle(

@@ -26,11 +26,11 @@ class SocketService {
       SocketData socketData = SocketData.fromJson(json);
 
       Set<Order> orders=Set();
-      if(orders.add(socketData.order)){
+      // if(orders.add(socketData.order)){
         if(socketData.orderItem.length>0) {
           _socketResponse.sink.add(socketData);
         }
-      }
+      // }
 
 
       print("recive ${socketData}");
