@@ -94,13 +94,6 @@ class _CurrentOrderState extends State<CurrentOrder> {
                                     decoration: BoxDecoration(color: YellowColor,borderRadius: BorderRadius.all(Radius.circular(8))),
                                     padding: EdgeInsets.all(8),
                                   ),
-                                  // Text(
-                                  //   "X",
-                                  //   style: const TextStyle(
-                                  //     backgroundColor: YellowColor,
-                                  //     fontFamily: "iransans",
-                                  //   ),
-                                  // ),
                                 ],
                               ),
                               Row(
@@ -253,6 +246,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                                 onPressed: () {
 
                                   _orderViewModel.deleteOrder(widget.socketData.order);
+                                  widget.onClose(widget.socketData);
                                   // for (var i in widget.socketData.orderItem) {
                                   //   _orderItemViewModel.deleteOrderItem(i);
                                   // }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:owner_ordering_frontend/view_model/orderItem_viewmodel.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 import '../../../model/entity/orderItem.dart';
 import '../../../model/entity/socketData.dart';
@@ -25,7 +26,13 @@ class _PassedOrderState extends State<PassedOrder> {
 
   final _orderViewModel = OrderViewModel();
   final _orderItemViewModel = OrderItemViewModel();
-
+  double totalCount(List<OrderItem> orderItem){
+    double total=0;
+    for(var i in orderItem){
+      total += i.quantity * i.productUnitPrice!;
+    }
+    return total;
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -61,32 +68,41 @@ class _PassedOrderState extends State<PassedOrder> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(widget
-                                  .socketData.orderItem[index].productTitle!),
-                              Text(widget.socketData.orderItem[index]
-                                      .productUnitPrice
-                                      .toString() +
-                                  " تومان"),
+                              Text("${widget.socketData?.orderItem?[index]?.productTitle }"),
+                              Row(
+                                children: [
+                                  Text("${widget.socketData?.orderItem?[index]?.productUnitPrice}".toPersianDigit().seRagham()),
+                                  Text(" تومان"),
+                                ],
+                              ),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "X" +
-                                    widget.socketData.orderItem[index].quantity
-                                        .toString(),
-                                style: const TextStyle(
-                                  backgroundColor: YellowColor,
-                                  fontFamily: "iransans",
-                                ),
+                              Row(
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      "${widget.socketData.orderItem[index].quantity}".toPersianDigit().seRagham()+"x",
+                                      style: const TextStyle(
+                                        fontFamily: "iransans",
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(color: YellowColor,borderRadius: BorderRadius.all(Radius.circular(8))),
+                                    padding: EdgeInsets.all(8),
+                                  ),
+                                ],
                               ),
-                              Text((widget.socketData.orderItem[index]
-                                              .productUnitPrice! *
-                                          widget.socketData.orderItem[index]
-                                              .quantity)
-                                      .toString() +
-                                  " تومان"),
+                              Row(
+                                children: [
+                                  Text("${(widget.socketData.orderItem[index]
+                                      .productUnitPrice! *
+                                      widget.socketData.orderItem[index]
+                                          .quantity).round()}".toPersianDigit().seRagham()),
+                                  Text(" تومان"),
+                                ],
+                              ),
                             ],
                           ),
                           const Divider(
@@ -127,7 +143,7 @@ class _PassedOrderState extends State<PassedOrder> {
                 const Text("مبلغ قابل پرداخت: ",
                     style: TextStyle(
                         fontFamily: "iransans", fontWeight: FontWeight.bold)),
-                Text(_orderViewModel.totalPrice.toString(),
+                Text(totalCount(widget.socketData.orderItem).toString().toPersianDigit().seRagham(),
                     style: const TextStyle(
                         fontFamily: "iransans", fontWeight: FontWeight.bold)),
               ],
